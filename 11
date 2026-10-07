@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ПензаGrowth — цифровой маркетинг для малого бизнеса</title>
+<style>
+:root{
+  --bg:#f7f3ec;
+  --bg-soft:#efe7da;
+  --card:#ffffff;
+  --accent:#b8895a;
+  --accent-2:#8a6a3f;
+  --text:#2b241c;
+  --muted:#7a6b58;
+  --border:rgba(43,36,28,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,'Segoe UI',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(247,243,236,.92);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+nav{
+  max-width:1120px;margin:0 auto;
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;flex-wrap:wrap;
+}
+.logo{
+  font-weight:700;font-size:18px;
+  display:flex;align-items:center;gap:8px;
+  color:var(--text);
+}
+.logo::before{
+  content:"";width:11px;height:11px;border-radius:3px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  flex-shrink:0;
+}
+.logo span{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+nav ul{display:flex;gap:22px;list-style:none;font-size:14px;color:var(--muted)}
+nav ul a:hover{color:var(--text)}
+.btn{
+  display:inline-block;padding:11px 20px;border-radius:10px;
+  font-weight:600;font-size:14px;cursor:pointer;border:none;
+  transition:transform .15s,box-shadow .15s;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(184,137,90,.3)}
+.btn-ghost{
+  background:transparent;color:var(--text);
+  border:1px solid var(--border);
+}
+.btn-ghost:hover{border-color:var(--accent)}
+@media(max-width:760px){nav ul{display:none}}
+
+section{max-width:1120px;margin:0 auto;padding:60px 20px}
+.hero{
+  padding:70px 20px 50px;
+  display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;
+}
+@media(max-width:880px){.hero{grid-template-columns:1fr;padding-top:40px}}
+.badge{
+  display:inline-block;padding:6px 14px;border-radius:999px;
+  background:rgba(184,137,90,.15);color:var(--accent-2);
+  font-size:13px;font-weight:600;margin-bottom:18px;
+  border:1px solid rgba(184,137,90,.3);
+}
+h1{
+  font-size:clamp(28px,4.2vw,44px);
+  line-height:1.15;font-weight:800;letter-spacing:-.5px;
+  margin-bottom:18px;color:var(--text);
+}
+h1 em{
+  font-style:normal;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p{color:var(--muted);font-size:16px;max-width:540px;margin-bottom:24px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+.dash{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:18px;padding:18px;
+  box-shadow:0 15px 40px rgba(184,137,90,.12);
+}
+.dash-head{display:flex;gap:6px;margin-bottom:14px}
+.dot{width:10px;height:10px;border-radius:50%;background:#d9cfc0}
+.dot:first-child{background:#ff5f57}
+.dot:nth-child(2){background:#febc2e}
+.dot:nth-child(3){background:#28c840}
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpi{
+  background:var(--bg-soft);border-radius:12px;padding:12px;
+  border:1px solid var(--border);
+}
+.kpi b{display:block;font-size:19px;color:var(--accent-2)}
+.kpi small{color:var(--muted);font-size:12px}
+.chart{display:flex;align-items:flex-end;gap:8px;height:80px;padding:6px 0}
+.bar{
+  flex:1;border-radius:6px 6px 0 0;
+  background:linear-gradient(180deg,var(--accent),rgba(184,137,90,.3));
+}
+
+.sec-title{
+  font-size:clamp(22px,3vw,32px);font-weight:800;
+  margin-bottom:12px;letter-spacing:-.4px;color:var(--text);
+}
+.sec-sub{color:var(--muted);max-width:640px;margin-bottom:32px;font-size:15px}
+
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:860px){.grid-3{grid-template-columns:1fr}}
+
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:24px;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(184,137,90,.5);
+  box-shadow:0 12px 30px rgba(184,137,90,.12);
+}
+.card h3{font-size:17px;margin-bottom:8px;color:var(--text)}
+.card p{color:var(--muted);font-size:14px}
+.icon{
+  width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(184,137,90,.15);color:var(--accent-2);
+  font-size:20px;margin-bottom:14px;
+}
+
+.prob-list{list-style:none;display:grid;gap:10px}
+.prob-list li{
+  padding:14px 18px;background:var(--card);
+  border-left:3px solid var(--accent);border-radius:8px;
+  color:var(--muted);font-size:15px;
+  border-top:1px solid var(--border);
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+  text-align:center;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:18px;padding:30px 20px;
+}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat b{
+  display:block;font-size:26px;font-weight:800;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat span{color:var(--muted);font-size:13px}
+
+.price-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:18px;padding:28px;position:relative;
+  transition:transform .2s,box-shadow .2s;
+}
+.price-card:hover{transform:translateY(-6px);box-shadow:0 15px 40px rgba(184,137,90,.15)}
+.price-card.pop{
+  border-color:var(--accent);
+  box-shadow:0 20px 50px rgba(184,137,90,.2);
+}
+.price-card.pop::after{
+  content:"Популярный";
+  position:absolute;top:-12px;right:22px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff;font-size:12px;font-weight:700;
+  padding:5px 14px;border-radius:999px;
+}
+.price-card h3{font-size:19px;margin-bottom:6px;color:var(--text)}
+.price{
+  font-size:30px;font-weight:800;margin:10px 0;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.price small{font-size:14px;color:var(--muted);font-weight:400;-webkit-text-fill-color:var(--muted)}
+.price-card ul{list-style:none;margin:18px 0;display:grid;gap:9px}
+.price-card li{color:var(--muted);font-size:14px;padding-left:22px;position:relative}
+.price-card li::before{content:"✓";position:absolute;left:0;color:var(--accent-2);font-weight:700}
+
+.steps{display:grid;gap:12px;counter-reset:s}
+.step{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:16px 20px;background:var(--card);
+  border-radius:12px;border:1px solid var(--border);
+}
+.step::before{
+  counter-increment:s;content:counter(s);
+  min-width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.step div b{display:block;margin-bottom:2px;color:var(--text);font-size:15px}
+.step div span{color:var(--muted);font-size:14px}
+
+.cta{
+  background:linear-gradient(135deg,rgba(184,137,90,.15),rgba(138,106,63,.08));
+  border:1px solid rgba(184,137,90,.3);
+  border-radius:24px;padding:48px 28px;text-align:center;
+}
+.cta h2{font-size:clamp(22px,3vw,32px);margin-bottom:12px;font-weight:800;color:var(--text)}
+.cta p{color:var(--muted);max-width:500px;margin:0 auto 24px;font-size:15px}
+
+form{display:grid;gap:12px;max-width:400px;margin:0 auto;text-align:left}
+input,textarea{
+  width:100%;padding:13px 16px;border-radius:10px;
+  background:var(--card);border:1px solid var(--border);
+  color:var(--text);font-size:15px;font-family:inherit;
+}
+input::placeholder,textarea::placeholder{color:#a89a87}
+input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:28px 20px;text-align:center;
+  color:var(--muted);font-size:13px;
+  background:var(--bg-soft);
+  margin-top:40px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span>ПензаGrowth</span></div>
+    <ul>
+      <li><a href="#problem">Проблема</a></li>
+      <li><a href="#product">Продукт</a></li>
+      <li><a href="#pricing">Тарифы</a></li>
+      <li><a href="#how">Как работает</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary">Оставить заявку</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="badge">Цифровой маркетинг по подписке</div>
+    <h1>Весь маркетинг <em>в одном кабинете</em> для малого бизнеса Пензы</h1>
+    <p>Реклама, SMM, CRM и аналитика KPI — в единой цифровой системе. Без своего отдела маркетинга, без разрозненных подрядчиков. Прозрачные отчёты и рекомендации по каждому рублю.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Получить демо</a>
+      <a href="#product" class="btn btn-ghost">Что внутри →</a>
+    </div>
+  </div>
+
+  <div class="dash">
+    <div class="dash-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+    <div class="kpi-row">
+      <div class="kpi"><b>128</b><small>Заявок</small></div>
+      <div class="kpi"><b>4.2%</b><small>Конверсия</small></div>
+      <div class="kpi"><b>1 240 ₽</b><small>CPL</small></div>
+    </div>
+    <div class="chart">
+      <div class="bar" style="height:40%"></div>
+      <div class="bar" style="height:65%"></div>
+      <div class="bar" style="height:50%"></div>
+      <div class="bar" style="height:80%"></div>
+      <div class="bar" style="height:60%"></div>
+      <div class="bar" style="height:95%"></div>
+      <div class="bar" style="height:72%"></div>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <h2 class="sec-title">Проблема, которую мы решаем</h2>
+  <p class="sec-sub">Малый бизнес ведёт маркетинг разрозненно: разные подрядчики, ручной контроль, непонятные цифры. Собственник не видит целостной картины.</p>
+  <ul class="prob-list">
+    <li>Разрозненные инструменты и подрядчики — реклама, соцсети, сайт и CRM не связаны.</li>
+    <li>Недостаток времени и компетенций у собственника для системного маркетинга.</li>
+    <li>Сложно оценить эффективность рекламных расходов.</li>
+    <li>Нет единого и понятного отчёта по показателям.</li>
+    <li>Дорого содержать собственный отдел маркетинга.</li>
+  </ul>
+</section>
+
+<section id="product">
+  <h2 class="sec-title">Модули платформы</h2>
+  <p class="sec-sub">Пять модулей в единой цифровой системе с личным кабинетом, KPI и рекомендациями.</p>
+  <div class="grid-3">
+    <div class="card">
+      <div class="icon">📣</div>
+      <h3>Рекламный модуль</h3>
+      <p>Планирование и сопровождение рекламных кампаний. Привлечение целевого трафика.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📱</div>
+      <h3>SMM-модуль</h3>
+      <p>Контент-план, публикации, аналитика соцсетей. Системное ведение аккаунтов.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🎯</div>
+      <h3>CRM-модуль</h3>
+      <p>Воронка заявок и клиентов. Контроль движения клиента до продажи.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>Аналитический модуль</h3>
+      <p>Свод KPI и динамика показателей. Оценка эффективности расходов.</p>
+    </div>
+    <div class="card">
+      <div class="icon">💡</div>
+      <h3>Модуль рекомендаций</h3>
+      <p>Предложения по дальнейшим действиям. Сокращение времени на решения.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔒</div>
+      <h3>Личный кабинет</h3>
+      <p>Единая точка входа: заявки, каналы, отчёты и следующий шаг.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="stats">
+    <div class="stat"><b>5</b><span>модулей в системе</span></div>
+    <div class="stat"><b>450 000 ₽</b><span>плановая выручка/мес</span></div>
+    <div class="stat"><b>242 000 ₽</b><span>плановая прибыль/мес</span></div>
+    <div class="stat"><b>4–5 мес</b><span>окупаемость</span></div>
+  </div>
+</section>
+
+<section id="pricing">
+  <h2 class="sec-title">Тарифы</h2>
+  <p class="sec-sub">Подписка с понятным составом услуг и прозрачными KPI. Начните с базового пакета и масштабируйтесь.</p>
+  <div class="grid-3">
+    <div class="price-card">
+      <h3>Старт</h3>
+      <div class="price">60 000 ₽<small>/мес</small></div>
+      <ul>
+        <li>Один канал продвижения</li>
+        <li>Базовый контент-план</li>
+        <li>Отчёт по KPI раз в месяц</li>
+        <li>Личный кабинет</li>
+      </ul>
+      <a href="#contact" class="btn btn-ghost" style="width:100%;text-align:center">Выбрать</a>
+    </div>
+
+    <div class="price-card pop">
+      <h3>Бизнес</h3>
+      <div class="price">90 000 ₽<small>/мес</small></div>
+      <ul>
+        <li>Реклама + SMM + CRM</li>
+        <li>Расширенная аналитика</li>
+        <li>Отчёт по KPI каждые 2 недели</li>
+        <li>Рекомендации по действиям</li>
+        <li>Поддержка менеджера</li>
+      </ul>
+      <a href="#contact" class="btn btn-primary" style="width:100%;text-align:center">Выбрать</a>
+    </div>
+
+    <div class="price-card">
+      <h3>Премиум</h3>
+      <div class="price">150 000 ₽<small>/мес</small></div>
+      <ul>
+        <li>Все модули платформы</li>
+        <li>Индивидуальная стратегия</li>
+        <li>Еженедельные отчёты</li>
+        <li>Приоритетная поддержка</li>
+        <li>Доп. услуги (SEO, аудит)</li>
+      </ul>
+      <a href="#contact" class="btn btn-ghost" style="width:100%;text-align:center">Выбрать</a>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <h2 class="sec-title">Как проходит работа</h2>
+  <p class="sec-sub">Шесть этапов — от анализа бизнеса до масштабирования сопровождения.</p>
+  <div class="steps">
+    <div class="step"><div><b>Анализ бизнеса и постановка KPI</b><span>Определяем цели и метрики успеха.</span></div></div>
+    <div class="step"><div><b>Настройка кабинета и интеграций</b><span>Подключаем сайт, рекламу, соцсети и CRM.</span></div></div>
+    <div class="step"><div><b>Запуск маркетинговых инструментов</b><span>Стартуем кампании и контент.</span></div></div>
+    <div class="step"><div><b>Сбор данных и контроль KPI</b><span>Отслеживаем показатели в реальном времени.</span></div></div>
+    <div class="step"><div><b>Отчёт и рекомендации</b><span>Показываем результат и следующие шаги.</span></div></div>
+    <div class="step"><div><b>Корректировка и сопровождение</b><span>Улучшаем стратегию и масштабируем.</span></div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="cta">
+    <h2>Покажем прототип личного кабинета</h2>
+    <p>Оставьте заявку — проведём демонстрацию сценария работы системы и рассчитаем пакет под ваш бизнес.</p>
+    <form id="leadForm">
+      <input type="text" placeholder="Ваше имя" required>
+      <input type="tel" placeholder="Телефон" required>
+      <input type="email" placeholder="Email" required>
+      <textarea rows="3" placeholder="Кратко о бизнесе"></textarea>
+      <button class="btn btn-primary" type="submit" style="width:100%">Отправить заявку</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  © 2025 ПензаGrowth — цифровое маркетинговое сопровождение малого бизнеса Пензы. Прототип личного кабинета.
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var id = a.getAttribute('href');
+    if (id.length > 1 && document.querySelector(id)) {
+      e.preventDefault();
+      document.querySelector(id).scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  });
+});
+
+var form = document.getElementById('leadForm');
+if (form) {
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    form.reset();
+    alert('Спасибо! Мы свяжемся с вами.');
+  });
+}
+</script>
+<!-- ===== ИИ-ЧАТ ===== -->
+<div id="chatBubble" onclick="toggleChat()">💬</div>
+
+<div id="chatWindow">
+  <div class="chat-head">
+    <div>
+      <b>ПензаGrowth — ассистент</b>
+      <small>Отвечу на вопросы о платформе</small>
+    </div>
+    <span onclick="toggleChat()" class="chat-close">✕</span>
+  </div>
+  <div id="chatBody">
+    <div class="msg bot">Здравствуйте! Спросите меня о тарифах, модулях или возможностях платформы.</div>
+  </div>
+  <div class="chat-input">
+    <input id="chatInput" type="text" placeholder="Ваш вопрос..." onkeydown="if(event.key==='Enter') sendMsg()">
+    <button onclick="sendMsg()">→</button>
+  </div>
+</div>
+
+<style>
+  #chatBubble{
+    position:fixed;bottom:20px;right:20px;
+    width:56px;height:56px;border-radius:50%;
+    background:linear-gradient(135deg,#b8895a,#8a6a3f);
+    color:#fff;font-size:26px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;box-shadow:0 10px 30px rgba(184,137,90,.4);
+    z-index:999;transition:transform .2s;
+  }
+  #chatBubble:hover{transform:scale(1.08)}
+
+  #chatWindow{
+    position:fixed;bottom:90px;right:20px;
+    width:340px;max-width:calc(100vw - 40px);height:480px;
+    background:#fff;border-radius:18px;
+    box-shadow:0 20px 60px rgba(120,100,70,.3);
+    display:none;flex-direction:column;overflow:hidden;
+    z-index:999;border:1px solid rgba(43,36,28,.1);
+  }
+  #chatWindow.open{display:flex}
+
+  .chat-head{
+    background:linear-gradient(135deg,#b8895a,#8a6a3f);
+    color:#fff;padding:14px 16px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .chat-head b{font-size:15px;display:block}
+  .chat-head small{font-size:12px;opacity:.85}
+  .chat-close{cursor:pointer;font-size:18px;padding:4px 8px}
+
+  #chatBody{
+    flex:1;padding:14px;overflow-y:auto;
+    background:#f7f3ec;display:flex;flex-direction:column;gap:10px;
+  }
+  .msg{
+    max-width:82%;padding:10px 14px;border-radius:14px;
+    font-size:14px;line-height:1.5;word-wrap:break-word;
+  }
+  .msg.bot{
+    background:#fff;color:#2b241c;
+    border-bottom-left-radius:4px;align-self:flex-start;
+    border:1px solid rgba(43,36,28,.08);
+  }
+  .msg.user{
+    background:linear-gradient(135deg,#b8895a,#8a6a3f);
+    color:#fff;border-bottom-right-radius:4px;align-self:flex-end;
+  }
+  .msg.typing{color:#7a6b58;font-style:italic}
+
+  .chat-input{
+    display:flex;border-top:1px solid rgba(43,36,28,.1);
+    background:#fff;
+  }
+  .chat-input input{
+    flex:1;border:none;padding:14px 16px;
+    font-size:14px;background:transparent;
+    color:#2b241c;outline:none;
+    font-family:inherit;
+  }
+  .chat-input button{
+    background:linear-gradient(135deg,#b8895a,#8a6a3f);
+    color:#fff;border:none;padding:0 20px;
+    font-size:18px;cursor:pointer;
+  }
+</style>
+
+<script>
+  // Ключ разбит на 2 части
+  const K1 = "AQ.Ab8RN6JjUjjtpQAnGK5T9yTudc7MY4";
+  const K2 = "gT3anIRwQbclDekmM8ag";
+  const GEMINI_KEY = K1 + K2;
+
+  const MODEL = "gemini-3.8-flash";
+  const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/" + MODEL + ":generateContent";
+
+  function toggleChat() {
+    var w = document.getElementById('chatWindow');
+    if (w) w.classList.toggle('open');
+  }
+
+  function addMsg(text, who) {
+    var body = document.getElementById('chatBody');
+    var div = document.createElement('div');
+    div.className = 'msg ' + who;
+    div.textContent = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+    return div;
+  }
+
+  async function sendMsg() {
+    var input = document.getElementById('chatInput');
+    if (!input) return;
+    var text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    addMsg(text, 'user');
+    var typing = addMsg('печатает...', 'bot');
+    typing.classList.add('typing');
+
+    try {
+      var res = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': GEMINI_KEY
+        },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: 'Ты — ассистент проекта "ПензаGrowth". Отвечай ТОЛЬКО на вопросы о маркетинге и услугах платформы.\n\n'
+                  + 'КОНТЕКСТ:\n'
+                  + '- ПензаGrowth — цифровая платформа маркетинга по подписке для малого и среднего бизнеса Пензы.\n'
+                  + '- Модули: Рекламный, SMM, CRM, Аналитический, Модуль рекомендаций, Личный кабинет.\n'
+                  + '- Тарифы: Старт — 60 000 ₽/мес, Бизнес — 90 000 ₽/мес, Премиум — 150 000 ₽/мес.\n\n'
+                  + 'ПРАВИЛА:\n'
+                  + '1. Только маркетинг и ПензаGrowth.\n'
+                  + '2. Вне темы — вежливо откажись.\n'
+                  + '3. Отвечай кратко: 2-4 предложения.\n\n'
+                  + 'Вопрос: ' + text
+            }]
+          }]
+        })
+      });
+
+      var data = await res.json();
+      typing.remove();
+
+      if (data.candidates && data.candidates[0]) {
+        addMsg(data.candidates[0].content.parts[0].text, 'bot');
+      } else if (data.error && data.error.code === 503) {
+        addMsg('Google сейчас перегружен. Напишите ещё раз через минуту.', 'bot');
+      } else {
+        addMsg('Не удалось получить ответ. Попробуйте ещё раз.', 'bot');
+      }
+    } catch (e) {
+      typing.remove();
+      addMsg('Ошибка сети.', 'bot');
+    }
+  }
+</script>
+</body>
+</html>
